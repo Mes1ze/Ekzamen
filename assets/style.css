@@ -1,0 +1,355 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: Montserrat_R;
+	src: url(./fonts/Montserrat-Regular.ttf);
+	display: swap;
+}
+
+@font-face {
+	font-family: Montserrat_B;
+	src: url(./fonts/Montserrat-Bold.ttf);
+	display: swap;
+}
+
+:root {
+	--black: #363636;
+	--white: #fff;
+	--hover: #b8b8ff;
+	--accent: #9381ff;
+}
+
+html {
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
+body {
+	font-size: 16px;
+	color: var(--black);
+	line-height: normal;
+	font-family: Montserrat_R;
+}
+
+section {
+	padding-bottom: 100px;
+}
+
+section:first-of-type {
+	margin-top: calc(100px + 93px);
+}
+
+.container {
+	max-width: 1820px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+header {
+	border-bottom: 1px solid var(--black);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: transparent;
+	transition: .5s;
+}
+
+header.scroll {
+	background-color: var(--white);
+}
+
+.container.header__wrapper {
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header-logo {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: center;
+	text-decoration: none;
+	color: currentColor;
+}
+
+.header__navigation {}
+
+.header__navigation-menu {
+	list-style: none;
+	display: flex;
+	gap: 30px;
+	align-items: center;
+}
+
+.header__navigation-item {}
+
+.header__navigation-link {
+	color: currentColor;
+	transition: .5s;
+	text-decoration: none;
+	font-size: inherit;
+	font-family: inherit;
+	position: relative;
+}
+
+.header__navigation-link::after {
+	position: absolute;
+	content: "";
+	width: 0%;
+	height: 1px;
+	background-color: var(--hover);
+	top: calc(100% + 3px);
+	left: 50%;
+	transition: .5s;
+}
+
+.header__navigation-link:hover {
+	color: var(--hover);
+}
+
+.header__navigation-link:hover::after {
+	width: 100%;
+	left: 0;
+}
+
+.header__profile {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.header__profile-btns__wrapper {
+	padding-top: 30px;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	pointer-events: none;
+	opacity: 0;
+	transition: .5s;
+}
+
+.header__profile-btns {
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	background-color: var(--white);
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px var(--black);
+}
+
+.header__profile:hover .header__profile-btns__wrapper {
+	pointer-events: all;
+	opacity: 1;
+}
+
+.reg-btn,
+.autho-btn {
+	padding: 10px 40px;
+	background-color: transparent;
+	border: 1px solid var(--black);
+	cursor: pointer;
+	border-radius: 5px;
+	font-family: inherit;
+	transition: .5s;
+}
+
+.reg-btn:hover,
+.autho-btn:hover {
+	background-color: var(--hover);
+	border: 1px solid var(--accent);
+}
+
+/* Попапы */
+.registration-popup,
+.authorization-popup,
+.success-popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.5s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 50px 20px;
+	z-index: 100;
+}
+
+.registration-popup.open,
+.authorization-popup.open,
+.success-popup.open {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.popup-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-container {
+	width: 500px;
+	position: relative;
+	background-color: white;
+	border-radius: 5px;
+	padding: 50px;
+}
+
+.popup-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	z-index: 10;
+	transition: 0.5s;
+}
+
+.popup-close path {
+	transition: 0.5s;
+}
+
+.popup-close:hover path {
+	stroke: black;
+}
+
+.registration-popup-content,
+.authorization-popup-content {}
+
+.registration-form,
+.authorization-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.registration-form-block,
+.authorization-form-block {
+	position: relative;
+	width: 100%;
+}
+
+.registration-form-block input,
+.authorization-form-block input {
+	padding: 16px 36px 16px 16px;
+	border: 1px solid var(--black);
+	border-radius: 5px;
+	outline: none;
+	font-size: 14px;
+	color: var(--black);
+	width: 100%;
+	transition: .5s;
+}
+
+.registration-form-block input::placeholder,
+.authorization-form-block input::placeholder {
+	color: lightgray;
+}
+
+.registration-form-block input:not(:placeholder-shown),
+.authorization-form-block input:not(:placeholder-shown) {
+	border: 1px solid var(--accent);
+}
+
+.registration-form-block input:hover,
+.authorization-form-block input:hover {
+	border: 1px solid var(--hover);
+}
+
+.registration-form-block input:focus,
+.registration-form-block input:focus-visible,
+.registration-form-block input:focus-within,
+.authorization-form-block input:focus,
+.authorization-form-block input:focus-visible,
+.authorization-form-block input:focus-within {
+	border: 1px solid var(--accent);
+}
+
+.registration-form-error,
+.authorization-form-error {}
+
+.show-password {
+	position: absolute;
+	background-color: transparent;
+	border: none;
+	top: 50%;
+	translate: 0 -50%;
+	right: 10px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.show-password svg {
+	width: 100%;
+	height: 100%;
+	transition: .5s;
+}
+
+.show-password:hover svg {
+	fill: var(--black);
+}
+
+.registration-btn,
+.authorization-btn {
+	padding: 10px 40px;
+	background-color: transparent;
+	border: 1px solid var(--black);
+	cursor: pointer;
+	border-radius: 5px;
+	font-family: inherit;
+	transition: .5s;
+
+}
+
+.registration-btn:hover,
+.authorization-btn:hover {
+	background-color: var(--hover);
+	border: 1px solid var(--accent);
+}
+
+/* Сообщение */
+.container.message {
+	padding: 100px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.container.message a {
+	padding: 10px 40px;
+	background-color: transparent;
+	border: 1px solid var(--black);
+	cursor: pointer;
+	border-radius: 5px;
+	font-family: inherit;
+	transition: .5s;
+	text-decoration: none;
+	color: currentColor;
+}
+
+.container.message a:hover {
+	background-color: var(--hover);
+	border: 1px solid var(--accent);
+}
